@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bookCopy()) {
+      <div>
+        <h2 data-cy="bookCopyDetailsHeading"><span jhiTranslate="projectMiniApp.bookCopy.detail.title">Book Copy</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bookCopy()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.bookCopy.yearPublished">Year Published</span></dt>
+          <dd>
+            <span>{{ bookCopy()!.yearPublished }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.bookCopy.publisher">Publisher</span></dt>
+          <dd>
+            @if (bookCopy()!.publisher) {
+              <div>
+                <a [routerLink]="['/publisher', bookCopy()!.publisher?.id, 'view']">{{ bookCopy()!.publisher?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.bookCopy.book">Book</span></dt>
+          <dd>
+            @if (bookCopy()!.book) {
+              <div>
+                <a [routerLink]="['/book', bookCopy()!.book?.id, 'view']">{{ bookCopy()!.book?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/book-copy', bookCopy()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

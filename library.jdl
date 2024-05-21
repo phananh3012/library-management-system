@@ -1,0 +1,74 @@
+// No entities were found for which JDL is to be generated. Please review console logs
+entity Author{
+    name String
+}
+entity Book{
+    title String
+}
+entity BookCopy{
+    yearPublished Integer
+}
+entity Category{
+    name String
+}
+entity Checkout{
+    startTime Instant
+    endTime Instant
+    isReturned Boolean
+}
+entity Hold{
+    startTime Instant
+    endTime Instant
+}
+entity Notification{
+    sentAt Instant
+    type String
+}
+entity PatronAccount{
+    cardNumber String
+    firstName String
+    surname String
+    email String
+    status String
+}
+entity Publisher{
+    name String
+}
+relationship ManyToMany{
+    Author{book} to Book{author}
+}
+relationship OneToMany{
+    Category{book} to Book
+}
+relationship ManyToMany{
+    Book{patronAccount} to PatronAccount{book}
+}
+relationship OneToMany{
+    Book{bookCopy} to BookCopy
+}
+relationship ManyToOne{
+    BookCopy{publisher} to Publisher
+}
+relationship OneToMany{
+    BookCopy{checkout} to Checkout
+}
+relationship OneToMany{
+    BookCopy{hold} to Hold
+}
+relationship OneToMany{
+    PatronAccount{notification} to Notification
+}
+relationship OneToMany{
+    PatronAccount{checkout} to Checkout
+}
+relationship OneToMany{
+    PatronAccount{hold} to Hold
+}
+// Options
+service * with serviceClass
+
+paginate * with pagination
+
+dto * with mapstruct
+
+filter *

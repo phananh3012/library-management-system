@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (checkout()) {
+      <div>
+        <h2 data-cy="checkoutDetailsHeading"><span jhiTranslate="projectMiniApp.checkout.detail.title">Checkout</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ checkout()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.checkout.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ checkout()!.startTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.checkout.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ checkout()!.endTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.checkout.isReturned">Is Returned</span></dt>
+          <dd>
+            <span>{{ checkout()!.isReturned }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.checkout.bookCopy">Book Copy</span></dt>
+          <dd>
+            @if (checkout()!.bookCopy) {
+              <div>
+                <a [routerLink]="['/book-copy', checkout()!.bookCopy?.id, 'view']">{{ checkout()!.bookCopy?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.checkout.patronAccount">Patron Account</span></dt>
+          <dd>
+            @if (checkout()!.patronAccount) {
+              <div>
+                <a [routerLink]="['/patron-account', checkout()!.patronAccount?.id, 'view']">{{ checkout()!.patronAccount?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/checkout', checkout()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

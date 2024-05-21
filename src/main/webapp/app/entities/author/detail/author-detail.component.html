@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (author()) {
+      <div>
+        <h2 data-cy="authorDetailsHeading"><span jhiTranslate="projectMiniApp.author.detail.title">Author</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ author()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.author.name">Name</span></dt>
+          <dd>
+            <span>{{ author()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.author.book">Book</span></dt>
+          <dd>
+            @for (book of author()!.books; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/book', book.id, 'view']">{{ book?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/author', author()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

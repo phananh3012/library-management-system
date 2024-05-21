@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240521092340"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "yearPublished",
+      "fieldType": "Integer"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "BookCopy",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "checkout",
+      "relationshipName": "checkout",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "hold",
+      "relationshipName": "hold",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "publisher",
+      "relationshipName": "publisher",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

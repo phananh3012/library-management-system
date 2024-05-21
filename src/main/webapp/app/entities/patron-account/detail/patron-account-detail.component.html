@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (patronAccount()) {
+      <div>
+        <h2 data-cy="patronAccountDetailsHeading"><span jhiTranslate="projectMiniApp.patronAccount.detail.title">Patron Account</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.cardNumber">Card Number</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.cardNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.surname">Surname</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.surname }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.email">Email</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.status">Status</span></dt>
+          <dd>
+            <span>{{ patronAccount()!.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.patronAccount.book">Book</span></dt>
+          <dd>
+            @for (book of patronAccount()!.books; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/book', book.id, 'view']">{{ book?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/patron-account', patronAccount()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

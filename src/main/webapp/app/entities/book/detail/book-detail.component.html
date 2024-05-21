@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (book()) {
+      <div>
+        <h2 data-cy="bookDetailsHeading"><span jhiTranslate="projectMiniApp.book.detail.title">Book</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ book()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.book.title">Title</span></dt>
+          <dd>
+            <span>{{ book()!.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.book.patronAccount">Patron Account</span></dt>
+          <dd>
+            @for (patronAccount of book()!.patronAccounts; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/patron-account', patronAccount.id, 'view']">{{ patronAccount?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.book.author">Author</span></dt>
+          <dd>
+            @for (author of book()!.authors; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/author', author.id, 'view']">{{ author?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.book.category">Category</span></dt>
+          <dd>
+            @if (book()!.category) {
+              <div>
+                <a [routerLink]="['/category', book()!.category?.id, 'view']">{{ book()!.category?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/book', book()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

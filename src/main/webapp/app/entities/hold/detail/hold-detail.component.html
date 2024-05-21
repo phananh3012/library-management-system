@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (hold()) {
+      <div>
+        <h2 data-cy="holdDetailsHeading"><span jhiTranslate="projectMiniApp.hold.detail.title">Hold</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ hold()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.hold.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ hold()!.startTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.hold.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ hold()!.endTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.hold.bookCopy">Book Copy</span></dt>
+          <dd>
+            @if (hold()!.bookCopy) {
+              <div>
+                <a [routerLink]="['/book-copy', hold()!.bookCopy?.id, 'view']">{{ hold()!.bookCopy?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="projectMiniApp.hold.patronAccount">Patron Account</span></dt>
+          <dd>
+            @if (hold()!.patronAccount) {
+              <div>
+                <a [routerLink]="['/patron-account', hold()!.patronAccount?.id, 'view']">{{ hold()!.patronAccount?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/hold', hold()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
