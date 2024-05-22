@@ -6,6 +6,7 @@ import com.mycompany.myapp.service.dto.BookDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -138,5 +139,11 @@ public class BookResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<BookDTO>> searchBook(@RequestParam String title) {
+        List<BookDTO> result = bookService.searchBooksByTitle(title);
+        return ResponseEntity.ok(result);
     }
 }

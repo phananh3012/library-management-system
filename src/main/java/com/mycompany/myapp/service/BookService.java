@@ -4,7 +4,9 @@ import com.mycompany.myapp.domain.Book;
 import com.mycompany.myapp.repository.BookRepository;
 import com.mycompany.myapp.service.dto.BookDTO;
 import com.mycompany.myapp.service.mapper.BookMapper;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -105,5 +107,9 @@ public class BookService {
     public void delete(Long id) {
         log.debug("Request to delete Book : {}", id);
         bookRepository.deleteById(id);
+    }
+
+    public List<BookDTO> searchBooksByTitle(String title) {
+        return bookRepository.findByTitleContaining(title).stream().map(bookMapper::toDto).collect(Collectors.toList());
     }
 }

@@ -27,4 +27,6 @@ public interface BookRepository extends BookRepositoryWithBagRelationships, JpaR
     default Page<Book> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    List<Book> findByTitleContaining(String title);
 }
